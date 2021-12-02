@@ -30,6 +30,7 @@
       .half {
         background-image: url("./Images/grass-block.png");
       }
+
       #board {
         background-color: #ccc;
         width: 100vmin;
@@ -38,11 +39,54 @@
         grid-template-rows: repeat(21, 1fr);
         grid-template-columns: repeat(21, 1fr);
       }
+
+      body {
+        display: flex;
+        justify-content: center;
+      }
+
+      #side-bar {
+        height: 100vh;
+        width: 20vw;
+        background-color: black;
+      }
+
+      #side-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .btn {
+        width: 25%;
+        height: 50px;
+        margin: 10%;
+        color: #fff;
+        text-align: start;
+      }
+
+      #pickake {
+        background: url("./Images/pickaxe.png") center center / cover no-repeat;
+      }
+
+      #shovel {
+        background: url("./Images/shovel.png") center center / cover no-repeat;
+      }
+
+      #axe {
+        background: url("./Images/axe.png") center center / cover no-repeat;
+      }
     </style>
     <title>Document</title>
   </head>
   <body>
     <div id="board"></div>
+    <div id="side-bar">
+      <button class="btn" id="pickake"></button>
+      <button class="btn" id="shovel"></button>
+      <button class="btn" id="axe"></button>
+    </div>
   </body>
   <script src="./game.js"></script>
 </html>

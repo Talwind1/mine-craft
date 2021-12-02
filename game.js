@@ -17,6 +17,8 @@ function createBoard() {
       let gameElement = document.createElement("div");
       gameElement.setAttribute("data-i", i);
       gameElement.setAttribute("data-j", j);
+      gameElement.classList.add("gameElement");
+
       const type = chooseType(gameElement);
 
       gameElement.classList.add(type);
@@ -45,9 +47,32 @@ function chooseType(element) {
   ) {
     //little tree
     type = materials.leaves;
+  } else if (
+    (i == 7 && j > 3 && j < 10) ||
+    (i == 6 && j > 4 && j < 9) ||
+    (i == 5 && j > 3 && j < 6)
+  ) {
+    type = materials.cloud;
+  } else if (i == 12 && (j == 20 || j == 19 || j == 15)) {
+    type = materials.stone;
   } else {
     type = materials.sky;
   }
 
   return type;
+}
+
+let elements = document.querySelectorAll(".gameElement");
+
+function getPlace() {
+  elements.forEach((element) => {
+    element.addEventListener("click", () => {
+      console.log(element.getAttribute("data - i"));
+    });
+  });
+}
+function removeClass() {
+  window.addEventListener("click", (e) => {
+    e.target;
+  });
 }

@@ -63,7 +63,6 @@
         height: 50px;
         margin: 10%;
         color: #fff;
-        text-align: start;
       }
 
       #pickake {
@@ -77,6 +76,16 @@
       #axe {
         background: url("./Images/axe.png") center center / cover no-repeat;
       }
+      .b-container {
+        height: 100px;
+        width: 200px;
+        border: 1px solid white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+      }
     </style>
     <title>Document</title>
   </head>
@@ -84,7 +93,9 @@
     <div id="board"></div>
     <div id="side-bar">
       <button class="btn" id="pickake"></button>
+
       <button class="btn" id="shovel"></button>
+
       <button class="btn" id="axe"></button>
     </div>
   </body>

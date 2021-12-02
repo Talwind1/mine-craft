@@ -67,10 +67,12 @@ let elements = document.querySelectorAll(".gameElement");
 function getPlace() {
   elements.forEach((element) => {
     element.addEventListener("click", () => {
-      console.log(element.getAttribute("data - i"));
+      console.log(element);
     });
   });
 }
+
+getPlace();
 function removeClass() {
   window.addEventListener("click", (e) => {
     e.target;

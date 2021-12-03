@@ -1,10 +1,12 @@
 const MATRIX_SIZE = 21;
 const board = document.querySelector("#board");
-const sideBar = document.getElementById("side-bar");
+
 const pickake = document.getElementById("1");
 const shovel = document.getElementById("2");
 const axe = document.getElementById("3");
-const materials = {
+const curBox = document.getElementById("curBox");
+
+const types = {
   sky: "sky",
   dirt: "dirt",
   stone: "stone",
@@ -14,24 +16,18 @@ const materials = {
   oak: "oak",
 };
 const tools = {
-  pickake: false,
-  shovel: false,
-  axe: false,
+  pickake: "pickake",
+  shovel: "shovel",
+  axe: "axe",
 };
-
-const types = {
-  sky: false,
-  dirt: false,
-  stone: false,
-  cloud: false,
-  leaves: false,
-  grass: false,
-  oak: false,
-};
+let curType;
+let curTool;
 
 function game() {
   window.createBoard();
-  removePart();
+  // window.addEventListener("click", () => {
+  //   console.log(`${curTool} ${curType}`);
+  // });
 }
 
 function createBoard() {
@@ -42,7 +38,7 @@ function createBoard() {
       gameElement.setAttribute("data-i", i);
       gameElement.setAttribute("data-j", j);
 
-      const type = chooseType(gameElement);
+      const type = drawType(gameElement);
 
       gameElement.classList.add(type);
 
@@ -51,71 +47,98 @@ function createBoard() {
   }
 }
 
-function chooseType(element) {
+function drawType(element) {
   const i = element.getAttribute("data-i");
   const j = element.getAttribute("data-j");
   let type;
   if (i > 13) {
-    type = materials.dirt;
+    type = types.dirt;
   } else if (i == 13) {
-    type = materials.grass;
+    type = types.grass;
   } else if (i < 13 && i > 9 && j > 16 && j < 18) {
     //little wood
-    type = materials.oak;
+    type = types.oak;
   } else if (
     (i < 10 && i > 6 && j > 15 && j < 19) ||
     (i == 12 && j > 3 && j < 7) ||
     (i == 11 && j == 5)
   ) {
     //little tree
-    type = materials.leaves;
+    type = types.leaves;
   } else if (
     (i == 7 && j > 3 && j < 10) ||
     (i == 6 && j > 4 && j < 9) ||
     (i == 5 && j > 3 && j < 6)
   ) {
-    type = materials.cloud;
+    type = types.cloud;
   } else if (i == 12 && (j == 20 || j == 19 || j == 15)) {
-    type = materials.stone;
+    type = types.stone;
   } else {
-    type = materials.sky;
+    type = types.sky;
   }
 
   return type;
 }
 
-function removePart() {
-  board.addEventListener("click", (e) => {
-    let type = e.target.getAttribute("class");
-    console.log(type);
-    //updateType(type);
-    //change*********
-    //  game.classList = "";
-    //  game.classList.add("blue");
-  });
-}
+board.addEventListener("click", (e) => {
+  let element = e.target;
+  let type = e.target.getAttribute("class");
+
+  curType = type;
+
+  switch (type) {
+    case types["stone"]:
+      if (curTool === tools["pickake"]) {
+        element.classList = "";
+        element.classList.add(types["sky"]);
+      }
+      curBox.classList.add(type);
+      break;
+    case types["oak"]:
+      if (curTool === tools["axe"]) {
+        element.classList = "";
+        element.classList.add(types["sky"]);
+        curBox.classList = "";
+        curBox.classList.add(type);
+      }
+      break;
+    case types["leaves"]:
+      if (curTool === tools["axe"]) {
+        element.classList = "";
+        element.classList.add(types["sky"]);
+        curBox.classList = "";
+        curBox.classList.add(type);
+      }
+      break;
+    case types["dirt"]:
+      if (curTool === tools["shovel"]) {
+        element.classList = "";
+        element.classList.add(types["sky"]);
+        curBox.classList = "";
+        curBox.classList.add(type);
+      }
+      break;
+    case types["grass"]:
+      if (curTool === tools["shovel"]) {
+        element.classList = "";
+        element.classList.add(types["sky"]);
+        curBox.classList = "";
+        curBox.classList.add(type);
+      }
+      break;
+  }
+});
 
 axe.addEventListener("click", () => {
-  refreshTools();
-  tools["axe"] = true;
-  console.log(tools);
+  curTool = "axe";
 });
 
 shovel.addEventListener("click", () => {
-  refreshTools();
-  tools["shovel"] = true;
-  console.log(tools);
+  curTool = "shovel";
 });
 
 pickake.addEventListener("click", () => {
-  refreshTools();
-  tools["pickake"] = true;
-  console.log(tools);
+  curTool = "pickake";
 });
 
-function refreshTools() {
-  tools["axe"] = false;
-  tools["pickake"] = false;
-  tools["shovel"] = false;
-}
 game();

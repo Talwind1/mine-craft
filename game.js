@@ -1,14 +1,38 @@
 const MATRIX_SIZE = 21;
-let board = document.querySelector("#board");
+const board = document.querySelector("#board");
+const sideBar = document.getElementById("side-bar");
+const pickake = document.getElementById("1");
+const shovel = document.getElementById("2");
+const axe = document.getElementById("3");
 const materials = {
-  sky: "blue",
-  dirt: "brown",
-  stone: "grey",
-  cloud: "white",
-  leaves: "green",
-  grass: "half",
-  oak: "brown2",
+  sky: "sky",
+  dirt: "dirt",
+  stone: "stone",
+  cloud: "cloud",
+  leaves: "leaves",
+  grass: "grass",
+  oak: "oak",
 };
+const tools = {
+  pickake: false,
+  shovel: false,
+  axe: false,
+};
+
+const types = {
+  sky: false,
+  dirt: false,
+  stone: false,
+  cloud: false,
+  leaves: false,
+  grass: false,
+  oak: false,
+};
+
+function game() {
+  window.createBoard();
+  removePart();
+}
 
 function createBoard() {
   let matrix = [];
@@ -17,7 +41,6 @@ function createBoard() {
       let gameElement = document.createElement("div");
       gameElement.setAttribute("data-i", i);
       gameElement.setAttribute("data-j", j);
-      gameElement.classList.add("gameElement");
 
       const type = chooseType(gameElement);
 
@@ -27,7 +50,6 @@ function createBoard() {
     }
   }
 }
-window.createBoard();
 
 function chooseType(element) {
   const i = element.getAttribute("data-i");
@@ -62,19 +84,38 @@ function chooseType(element) {
   return type;
 }
 
-let elements = document.querySelectorAll(".gameElement");
-
-function getPlace() {
-  elements.forEach((element) => {
-    element.addEventListener("click", () => {
-      console.log(element);
-    });
+function removePart() {
+  board.addEventListener("click", (e) => {
+    let type = e.target.getAttribute("class");
+    console.log(type);
+    //updateType(type);
+    //change*********
+    //  game.classList = "";
+    //  game.classList.add("blue");
   });
 }
 
-getPlace();
-function removeClass() {
-  window.addEventListener("click", (e) => {
-    e.target;
-  });
+axe.addEventListener("click", () => {
+  refreshTools();
+  tools["axe"] = true;
+  console.log(tools);
+});
+
+shovel.addEventListener("click", () => {
+  refreshTools();
+  tools["shovel"] = true;
+  console.log(tools);
+});
+
+pickake.addEventListener("click", () => {
+  refreshTools();
+  tools["pickake"] = true;
+  console.log(tools);
+});
+
+function refreshTools() {
+  tools["axe"] = false;
+  tools["pickake"] = false;
+  tools["shovel"] = false;
 }
+game();

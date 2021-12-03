@@ -6,63 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <style>
-      .blue {
+      @font-face {
+        font-family: "minecraftmedium";
+        src: url("./Fonts/Minecraft.ttf");
+        font-weight: normal;
+        font-style: normal;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .sky {
         background-color: rgb(103, 135, 204);
       }
 
-      .white {
+      .cloud {
         background-color: rgb(255, 255, 255);
       }
 
-      .green {
+      .leaves {
         background-image: url("./Images/leaves-block.png");
       }
 
-      .brown {
+      .dirt {
         background-image: url("./Images/dirt-block.png");
       }
-      .brown2 {
+      .oak {
         background-image: url("./Images/oak-log-block.png");
       }
-      .grey {
+      .stone {
         background-image: url("./Images/stone-block.png");
       }
-      .half {
+      .grass {
         background-image: url("./Images/grass-block.png");
       }
 
       #board {
+        margin: 0 auto;
         background-color: #ccc;
         width: 100vmin;
         height: 100vmin;
         display: grid;
         grid-template-rows: repeat(21, 1fr);
         grid-template-columns: repeat(21, 1fr);
-      }
-
-      body {
-        display: flex;
-        justify-content: center;
-      }
-
-      #side-bar {
-        height: 100vh;
-        width: 20vw;
-        background-color: black;
-      }
-
-      #side-bar {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .btn {
-        width: 25%;
-        height: 50px;
-        margin: 10%;
-        color: #fff;
       }
 
       #pickake {
@@ -76,15 +64,41 @@
       #axe {
         background: url("./Images/axe.png") center center / cover no-repeat;
       }
-      .b-container {
-        height: 100px;
-        width: 200px;
-        border: 1px solid white;
+      #side-bar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 15vw;
+        background-color: black;
+        justify-self: flex-end;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: transparent;
+      }
+
+      .btn {
+        width: 25%;
+        height: 50px;
+        margin: 10%;
+        color: #fff;
+      }
+      .container {
+        height: 140px;
+        width: 130px;
+        border: 1px solid #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+        padding: 10px, 0;
+      }
+      .btnText {
+        color: #fff;
+        font-family: "minecraftmedium";
+        font-size: 20px;
       }
     </style>
     <title>Document</title>
@@ -92,11 +106,18 @@
   <body>
     <div id="board"></div>
     <div id="side-bar">
-      <button class="btn" id="pickake"></button>
-
-      <button class="btn" id="shovel"></button>
-
-      <button class="btn" id="axe"></button>
+      <div class="container" id="1">
+        <div class="btn" id="pickake"></div>
+        <h3 class="btnText">pickake</h3>
+      </div>
+      <div class="container" id="2">
+        <div class="btn" id="shovel"></div>
+        <h3 class="btnText">shovel</h3>
+      </div>
+      <div class="container" id="3">
+        <div class="btn" id="axe"></div>
+        <h3 class="btnText">axe</h3>
+      </div>
     </div>
   </body>
   <script src="./game.js"></script>

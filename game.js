@@ -86,50 +86,48 @@ board.addEventListener("click", (e) => {
 
   curType = type;
 
-  if (curBox.getAttribute("data-click")) {
-    returnPart(type, element);
-  } else {
-    switch (type) {
-      case types["stone"]:
-        if (curTool === tools["pickake"]) {
-          element.classList = "";
-          element.classList.add(types["sky"]);
-        }
+  switch (type) {
+    case types["stone"]:
+      if (curTool === tools["pickake"]) {
+        element.classList = "";
+        element.classList.add(types["sky"]);
+        curBox.classList = "";
+        curBox.classList.add(type);
+      }
 
-        break;
-      case types["oak"]:
-        if (curTool === tools["axe"]) {
-          element.classList = "";
-          element.classList.add(types["sky"]);
-          curBox.classList = "";
-          curBox.classList.add(type);
-        }
-        break;
-      case types["leaves"]:
-        if (curTool === tools["axe"]) {
-          element.classList = "";
-          element.classList.add(types["sky"]);
-          curBox.classList = "";
-          curBox.classList.add(type);
-        }
-        break;
-      case types["dirt"]:
-        if (curTool === tools["shovel"]) {
-          element.classList = "";
-          element.classList.add(types["sky"]);
-          curBox.classList = "";
-          curBox.classList.add(type);
-        }
-        break;
-      case types["grass"]:
-        if (curTool === tools["shovel"]) {
-          element.classList = "";
-          element.classList.add(types["sky"]);
-          curBox.classList = "";
-          curBox.classList.add(type);
-        }
-        break;
-    }
+      break;
+    case types["oak"]:
+      if (curTool === tools["axe"]) {
+        element.classList = "";
+        element.classList.add(types["sky"]);
+        curBox.classList = "";
+        curBox.classList.add(type);
+      }
+      break;
+    case types["leaves"]:
+      if (curTool === tools["axe"]) {
+        element.classList = "";
+        element.classList.add(types["sky"]);
+        curBox.classList = "";
+        curBox.classList.add(type);
+      }
+      break;
+    case types["dirt"]:
+      if (curTool === tools["shovel"]) {
+        element.classList = "";
+        element.classList.add(types["sky"]);
+        curBox.classList = "";
+        curBox.classList.add(type);
+      }
+      break;
+    case types["grass"]:
+      if (curTool === tools["shovel"]) {
+        element.classList = "";
+        element.classList.add(types["sky"]);
+        curBox.classList = "";
+        curBox.classList.add(type);
+      }
+      break;
   }
 });
 
@@ -145,17 +143,24 @@ pickake.addEventListener("click", () => {
   curTool = "pickake";
 });
 
-curBox.addEventListener("click", (e) => {
-  e.target.setAttribute("data-click", true);
-});
 game();
 
-function returnPart(type, element) {
-  const curBoxType = curBox.getAttribute("class");
-  if (type === types["sky"] || type === types["cloud"]) {
-    element.classList = "";
-    element.classList.add(curBoxType);
-    curBox.classList = "";
-    curBox.setAttribute("data-click", false);
+curBox.addEventListener("click", (e) => {
+  let elementBox = e.target;
+  elementBox.setAttribute("data-clicked", true);
+  let typeBox = elementBox.getAttribute("class");
+  {
+    board.addEventListener("click", (e) => {
+      if (elementBox.getAttribute("data-clicked")) {
+        let gameElement = e.target;
+        let type = gameElement.getAttribute("class");
+        if (type === types["sky"] || type === types["cloud"]) {
+          gameElement.classList = "";
+          gameElement.classList.add(typeBox);
+          elementBox.classList = "";
+          elementBox.setAttribute("data-clicked", false);
+        }
+      }
+    });
   }
-}
+});

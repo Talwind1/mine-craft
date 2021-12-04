@@ -17,9 +17,20 @@
         padding: 0;
         box-sizing: border-box;
       }
+      #all {
+        display: flex;
+        justify-content: space-between;
+      }
+      #divBoard {
+        width: 80%;
+      }
+
+      #divSide {
+        width: 20%;
+      }
 
       .sky {
-        background-color: rgb(103, 135, 204);
+        background-color: rgb(142, 207, 250);
       }
 
       .cloud {
@@ -46,7 +57,7 @@
       #board {
         margin: 0 auto;
         background-color: #ccc;
-        width: 100vmin;
+        width: 130vmin;
         height: 100vmin;
         display: grid;
         grid-template-rows: repeat(21, 1fr);
@@ -65,11 +76,8 @@
         background: url("./Images/axe.png") center center / cover no-repeat;
       }
       #side-bar {
-        position: fixed;
-        top: 0;
-        right: 0;
         height: 100vh;
-        width: 15vw;
+        width: 100%;
         background-color: black;
         justify-self: flex-end;
         display: flex;
@@ -110,21 +118,26 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="board"></div>
-    <div id="side-bar">
-      <div class="container" id="1">
-        <div class="btn" id="pickake"></div>
-        <h3 class="btnText">pickake</h3>
+    <div id="all">
+      <div id="divBoard"><div id="board"></div></div>
+
+      <div id="divSide">
+        <div id="side-bar">
+          <div class="container" id="1">
+            <div class="btn" id="pickake"></div>
+            <h3 class="btnText">pickake</h3>
+          </div>
+          <div class="container" id="2">
+            <div class="btn" id="shovel"></div>
+            <h3 class="btnText">shovel</h3>
+          </div>
+          <div class="container" id="3">
+            <div class="btn" id="axe"></div>
+            <h3 class="btnText">axe</h3>
+          </div>
+          <div id="curBox"></div>
+        </div>
       </div>
-      <div class="container" id="2">
-        <div class="btn" id="shovel"></div>
-        <h3 class="btnText">shovel</h3>
-      </div>
-      <div class="container" id="3">
-        <div class="btn" id="axe"></div>
-        <h3 class="btnText">axe</h3>
-      </div>
-      <div id="curBox"></div>
     </div>
   </body>
   <script src="./game.js"></script>

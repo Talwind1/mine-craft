@@ -4,117 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <style>
-      @font-face {
-        font-family: "minecraftmedium";
-        src: url("./Fonts/Minecraft.ttf");
-        font-weight: normal;
-        font-style: normal;
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      #all {
-        display: flex;
-        justify-content: space-between;
-      }
-      #divBoard {
-        width: 80%;
-      }
-
-      #divSide {
-        width: 20%;
-      }
-
-      .sky {
-        background-color: rgb(142, 207, 250);
-      }
-
-      .cloud {
-        background-color: rgb(255, 255, 255);
-      }
-
-      .leaves {
-        background-image: url("./Images/leaves-block.png");
-      }
-
-      .dirt {
-        background-image: url("./Images/dirt-block.png");
-      }
-      .oak {
-        background-image: url("./Images/oak-log-block.png");
-      }
-      .stone {
-        background-image: url("./Images/stone-block.png");
-      }
-      .grass {
-        background-image: url("./Images/grass-block.png");
-      }
-
-      #board {
-        margin: 0 auto;
-        background-color: #ccc;
-        width: 130vmin;
-        height: 100vmin;
-        display: grid;
-        grid-template-rows: repeat(21, 1fr);
-        grid-template-columns: repeat(21, 1fr);
-      }
-
-      #pickake {
-        background: url("./Images/pickaxe.png") center center / cover no-repeat;
-      }
-
-      #shovel {
-        background: url("./Images/shovel.png") center center / cover no-repeat;
-      }
-
-      #axe {
-        background: url("./Images/axe.png") center center / cover no-repeat;
-      }
-      #side-bar {
-        height: 100vh;
-        width: 100%;
-        background-color: black;
-        justify-self: flex-end;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .btn {
-        width: 25%;
-        height: 50px;
-        margin: 10%;
-        color: #fff;
-      }
-      .container {
-        height: 140px;
-        width: 130px;
-        border: 1px solid #fff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: 10px;
-        padding: 10px, 0;
-      }
-      .btnText {
-        color: #fff;
-        font-family: "minecraftmedium";
-        font-size: 20px;
-      }
-
-      #curBox {
-        width: 50px;
-        height: 50px;
-        border: 1px solid #fff;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    
     <title>Document</title>
   </head>
   <body>
@@ -123,19 +14,21 @@
 
       <div id="divSide">
         <div id="side-bar">
-          <div class="container" id="1">
-            <div class="btn" id="pickake"></div>
+          <div class="container" id="pickake">
+            <div class="btn" id="pickake1"></div>
             <h3 class="btnText">pickake</h3>
           </div>
-          <div class="container" id="2">
-            <div class="btn" id="shovel"></div>
+          <div class="container" id="shovel">
+            <div class="btn" id="shovel1"></div>
             <h3 class="btnText">shovel</h3>
           </div>
-          <div class="container" id="3">
-            <div class="btn" id="axe"></div>
+          <div class="container" id="axe">
+            <div class="btn" id="axe1"></div>
             <h3 class="btnText">axe</h3>
           </div>
-          <div id="curBox"></div>
+          <div id="inventory">
+          </div>
+          </div>
         </div>
       </div>
     </div>

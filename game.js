@@ -1,10 +1,14 @@
 const MATRIX_SIZE = 21;
 const board = document.querySelector("#board");
 
-const pickake = document.getElementById("1");
-const shovel = document.getElementById("2");
-const axe = document.getElementById("3");
-const curBox = document.getElementById("curBox");
+const pickake = document.getElementById("pickake");
+const shovel = document.getElementById("shovel");
+const axe = document.getElementById("axe");
+const curBox = document.getElementById("inventory-collection");
+
+let curTool;
+
+const inventory = document.querySelector("#inventory");
 
 const types = {
   sky: "sky",
@@ -15,19 +19,25 @@ const types = {
   grass: "grass",
   oak: "oak",
 };
+
+const changeable = {
+  sky: "sky",
+  cloud: "cloud",
+};
 const tools = {
   pickake: "pickake",
   shovel: "shovel",
   axe: "axe",
 };
-let curType;
-let curTool;
+
+const matches = {
+  pickake: [types["stone"]],
+  shovel: [types["dirt"]],
+  axe: [types["oak"], types["leaves"]],
+};
 
 function game() {
   window.createBoard();
-  // window.addEventListener("click", () => {
-  //   console.log(`${curTool} ${curType}`);
-  // });
 }
 
 function createBoard() {
@@ -84,52 +94,36 @@ board.addEventListener("click", (e) => {
   let element = e.target;
   let type = e.target.getAttribute("class");
 
-  curType = type;
-
-  switch (type) {
-    case types["stone"]:
-      if (curTool === tools["pickake"]) {
-        element.classList = "";
-        element.classList.add(types["sky"]);
-        curBox.classList = "";
-        curBox.classList.add(type);
-      }
-
-      break;
-    case types["oak"]:
-      if (curTool === tools["axe"]) {
-        element.classList = "";
-        element.classList.add(types["sky"]);
-        curBox.classList = "";
-        curBox.classList.add(type);
-      }
-      break;
-    case types["leaves"]:
-      if (curTool === tools["axe"]) {
-        element.classList = "";
-        element.classList.add(types["sky"]);
-        curBox.classList = "";
-        curBox.classList.add(type);
-      }
-      break;
-    case types["dirt"]:
-      if (curTool === tools["shovel"]) {
-        element.classList = "";
-        element.classList.add(types["sky"]);
-        curBox.classList = "";
-        curBox.classList.add(type);
-      }
-      break;
-    case types["grass"]:
-      if (curTool === tools["shovel"]) {
-        element.classList = "";
-        element.classList.add(types["sky"]);
-        curBox.classList = "";
-        curBox.classList.add(type);
-      }
-      break;
-  }
+  removePart(element, type);
+  addToInventory(type);
 });
+
+function removePart(element, type) {
+  if (matches[curTool].includes(type)) {
+    element.classList = "";
+    element.setAttribute("class", types["sky"]);
+  }
+  //
+  // else {
+  //   let tool = document.querySelector(tools[curTool]);
+  //   console.log(tool);
+  //   tool.classList.toggle("red");
+  //add red class!
+  //   setTimeout(() => {
+  //     tool.classList.toggle("red"); // open red class
+  //   }, 200);
+  // }
+
+  function removeElement(element) {
+    element.classList = "";
+    element.classList.add(types["sky"]);
+  }
+}
+
+function addToInventory(type) {
+  inventory.classList = "";
+  inventory.classList.add(type);
+}
 
 axe.addEventListener("click", () => {
   curTool = "axe";
@@ -143,24 +137,19 @@ pickake.addEventListener("click", () => {
   curTool = "pickake";
 });
 
-game();
-
-curBox.addEventListener("click", (e) => {
-  let elementBox = e.target;
-  elementBox.setAttribute("data-clicked", true);
-  let typeBox = elementBox.getAttribute("class");
-  {
-    board.addEventListener("click", (e) => {
-      if (elementBox.getAttribute("data-clicked")) {
-        let gameElement = e.target;
-        let type = gameElement.getAttribute("class");
-        if (type === types["sky"] || type === types["cloud"]) {
-          gameElement.classList = "";
-          gameElement.classList.add(typeBox);
-          elementBox.classList = "";
-          elementBox.setAttribute("data-clicked", false);
-        }
-      }
-    });
+inventory.addEventListener("click", (e) => {
+  if (e.target.classList) {
+    board.addEventListener("click", addPart);
   }
 });
+
+function addPart(e) {
+  let element = e.target;
+  let type = e.target.getAttribute("class");
+  if (type === types["sky"]) {
+    element.classList = "";
+    element.classList.add(inventory.getAttribute("class"));
+  }
+}
+
+game();

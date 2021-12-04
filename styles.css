@@ -4,12 +4,42 @@
   font-weight: normal;
   font-style: normal;
 }
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: blanchedalmond;
 }
+body {
+  position: relative;
+}
+
+#start {
+  width: 100%;
+  height: 100%;
+  background-image: url("./Images/minecraft.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#play {
+  margin-bottom: 100px;
+  height: auto;
+  width: 10vw;
+  border: 1px solid cadetblue;
+}
+
+h1 {
+  text-align: center;
+  font-family: "minecraft";
+}
+
 #all {
   display: flex;
   justify-content: space-between;
@@ -114,7 +144,7 @@
   height: 50px;
   border: 1px solid #fff;
   background-color: rgb(245, 222, 187);
-  opacity: 0.8;
+
   text-align: center;
 }
 
@@ -126,6 +156,6 @@
   background-color: transparent;
 }
 
-.red {
-  background-color: red;
+.blue {
+  background-color: blue;
 }

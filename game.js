@@ -7,7 +7,7 @@ const axe = document.getElementById("axe");
 const curBox = document.getElementById("inventory-collection");
 
 let curTool;
-
+const play = document.querySelector("#play");
 const inventory = document.querySelector("#inventory");
 
 const types = {
@@ -20,10 +20,6 @@ const types = {
   oak: "oak",
 };
 
-const changeable = {
-  sky: "sky",
-  cloud: "cloud",
-};
 const tools = {
   pickake: "pickake",
   shovel: "shovel",
@@ -32,9 +28,13 @@ const tools = {
 
 const matches = {
   pickake: [types["stone"]],
-  shovel: [types["dirt"]],
+  shovel: [types["dirt"], types["grass"]],
   axe: [types["oak"], types["leaves"]],
 };
+
+play.addEventListener("click", () => {
+  document.querySelector("#start").style.display = "none";
+});
 
 function game() {
   window.createBoard();
@@ -91,33 +91,25 @@ function drawType(element) {
 }
 
 board.addEventListener("click", (e) => {
+  console.log();
   let element = e.target;
   let type = e.target.getAttribute("class");
 
-  removePart(element, type);
-  addToInventory(type);
+  if (isMatch(element, type)) {
+    addToInventory(type);
+    removePart(element, type);
+  }
 });
 
-function removePart(element, type) {
-  if (matches[curTool].includes(type)) {
-    element.classList = "";
-    element.setAttribute("class", types["sky"]);
-  }
-  //
-  // else {
-  //   let tool = document.querySelector(tools[curTool]);
-  //   console.log(tool);
-  //   tool.classList.toggle("red");
-  //add red class!
-  //   setTimeout(() => {
-  //     tool.classList.toggle("red"); // open red class
-  //   }, 200);
-  // }
+function isMatch(element, type) {
+  if (curTool) {
+    return matches[curTool].includes(type);
+  } else return false;
+}
 
-  function removeElement(element) {
-    element.classList = "";
-    element.classList.add(types["sky"]);
-  }
+function removePart(element, type) {
+  element.classList = "";
+  element.setAttribute("class", types["sky"]);
 }
 
 function addToInventory(type) {
@@ -126,15 +118,18 @@ function addToInventory(type) {
 }
 
 axe.addEventListener("click", () => {
-  curTool = "axe";
+  board.removeEventListener("click", addPart);
+  curTool = tools["axe"];
 });
 
-shovel.addEventListener("click", () => {
-  curTool = "shovel";
+shovel.addEventListener("click", (e) => {
+  board.removeEventListener("click", addPart);
+  curTool = tools["shovel"];
 });
 
 pickake.addEventListener("click", () => {
-  curTool = "pickake";
+  board.removeEventListener("click", addPart);
+  curTool = tools["pickake"];
 });
 
 inventory.addEventListener("click", (e) => {
@@ -145,11 +140,13 @@ inventory.addEventListener("click", (e) => {
 
 function addPart(e) {
   let element = e.target;
-  let type = e.target.getAttribute("class");
-  if (type === types["sky"]) {
+  let type = element.getAttribute("class");
+  if (type === types["sky"] || type === types["cloud"]) {
     element.classList = "";
     element.classList.add(inventory.getAttribute("class"));
   }
+  inventory.classList = "";
+  board.removeEventListener("click", addPart);
 }
 
 game();

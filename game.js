@@ -1,13 +1,13 @@
 const MATRIX_SIZE = 21;
 const board = document.querySelector("#board");
 
-const pickake = document.getElementById("pickake");
+const pickaxe = document.getElementById("pickaxe");
 const shovel = document.getElementById("shovel");
 const axe = document.getElementById("axe");
-const curBox = document.getElementById("inventory-collection");
 
 let curTool;
 const play = document.querySelector("#play");
+const restart = document.querySelector("#restart");
 const inventory = document.querySelector("#inventory");
 
 const types = {
@@ -21,19 +21,23 @@ const types = {
 };
 
 const tools = {
-  pickake: "pickake",
+  pickaxe: "pickaxe",
   shovel: "shovel",
   axe: "axe",
 };
 
 const matches = {
-  pickake: [types["stone"]],
+  pickaxe: [types["stone"]],
   shovel: [types["dirt"], types["grass"]],
   axe: [types["oak"], types["leaves"]],
 };
 
 play.addEventListener("click", () => {
   document.querySelector("#start").style.display = "none";
+});
+restart.addEventListener("click", () => {
+  let divs = board.querySelectorAll("div");
+  divs.forEach((div) => drawType(div));
 });
 
 function game() {
@@ -98,6 +102,12 @@ board.addEventListener("click", (e) => {
   if (isMatch(element, type)) {
     addToInventory(type);
     removePart(element, type);
+  } else {
+    let tool = tools[curTool.toString()];
+    tool = document.getElementById(tool);
+    if(type!==)
+    tool.classList.add("red");
+    setTimeout(() => tool.classList.remove("red"), 400);
   }
 });
 
@@ -120,16 +130,25 @@ function addToInventory(type) {
 axe.addEventListener("click", () => {
   board.removeEventListener("click", addPart);
   curTool = tools["axe"];
+  axe.classList.add("blue");
+  shovel.classList.remove("blue");
+  pickaxe.classList.remove("blue");
 });
 
 shovel.addEventListener("click", (e) => {
   board.removeEventListener("click", addPart);
   curTool = tools["shovel"];
+  axe.classList.remove("blue");
+  shovel.classList.add("blue");
+  pickaxe.classList.remove("blue");
 });
 
-pickake.addEventListener("click", () => {
+pickaxe.addEventListener("click", () => {
   board.removeEventListener("click", addPart);
-  curTool = tools["pickake"];
+  curTool = tools["pickaxe"];
+  axe.classList.remove("blue");
+  shovel.classList.remove("blue");
+  pickaxe.classList.add("blue");
 });
 
 inventory.addEventListener("click", (e) => {
@@ -144,8 +163,8 @@ function addPart(e) {
   if (type === types["sky"] || type === types["cloud"]) {
     element.classList = "";
     element.classList.add(inventory.getAttribute("class"));
+    inventory.classList = "";
   }
-  inventory.classList = "";
   board.removeEventListener("click", addPart);
 }
 

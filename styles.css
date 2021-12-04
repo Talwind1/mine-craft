@@ -40,6 +40,11 @@ h1 {
   font-family: "minecraft";
 }
 
+#restart {
+  font-family: "minecraft";
+  margin: 50px;
+  padding: 10px;
+}
 #all {
   display: flex;
   justify-content: space-between;
@@ -89,7 +94,7 @@ h1 {
   grid-template-columns: repeat(21, 1fr);
 }
 
-#pickake1 {
+#pickaxe1 {
   background: url("./Images/pickaxe.png") center center / cover no-repeat;
 }
 
@@ -132,7 +137,7 @@ h1 {
 }
 .btnText {
   color: rgb(37, 7, 7);
-  font-family: "Lucida Console", "Courier New", monospace;
+  font-family: "minecraft";
   /* "minecraftmedium"; */
   font-size: 16px;
   margin: 10px;
@@ -158,4 +163,8 @@ h1 {
 
 .blue {
   background-color: blue;
+}
+
+.red {
+  background-color: red;
 }

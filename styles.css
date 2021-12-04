@@ -11,9 +11,6 @@
   box-sizing: border-box;
   background-color: blanchedalmond;
 }
-body {
-  position: relative;
-}
 
 #start {
   width: 100%;
@@ -124,7 +121,6 @@ h1 {
   color: #fff;
 }
 .container {
-  /* background-color: rgb(21, 26, 34); */
   height: 140px;
   width: 130px;
   border: 2px solid #fff;
@@ -138,7 +134,6 @@ h1 {
 .btnText {
   color: rgb(37, 7, 7);
   font-family: "minecraft";
-  /* "minecraftmedium"; */
   font-size: 16px;
   margin: 10px;
 }
@@ -149,7 +144,6 @@ h1 {
   height: 50px;
   border: 1px solid #fff;
   background-color: rgb(245, 222, 187);
-
   text-align: center;
 }
 

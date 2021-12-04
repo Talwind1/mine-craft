@@ -1,15 +1,12 @@
 const MATRIX_SIZE = 21;
 const board = document.querySelector("#board");
-
 const pickaxe = document.getElementById("pickaxe");
 const shovel = document.getElementById("shovel");
 const axe = document.getElementById("axe");
-
-let curTool;
 const play = document.querySelector("#play");
 const restart = document.querySelector("#restart");
 const inventory = document.querySelector("#inventory");
-
+let curTool;
 const types = {
   sky: "sky",
   dirt: "dirt",
@@ -35,9 +32,10 @@ const matches = {
 play.addEventListener("click", () => {
   document.querySelector("#start").style.display = "none";
 });
+
 restart.addEventListener("click", () => {
-  let divs = board.querySelectorAll("div");
-  divs.forEach((div) => drawType(div));
+  board.innerHTML = "";
+  createBoard();
 });
 
 function game() {
@@ -45,7 +43,6 @@ function game() {
 }
 
 function createBoard() {
-  let matrix = [];
   for (let i = 0; i < MATRIX_SIZE; i++) {
     for (let j = 0; j < MATRIX_SIZE; j++) {
       let gameElement = document.createElement("div");
@@ -105,7 +102,6 @@ board.addEventListener("click", (e) => {
   } else {
     let tool = tools[curTool.toString()];
     tool = document.getElementById(tool);
-    if(type!==)
     tool.classList.add("red");
     setTimeout(() => tool.classList.remove("red"), 400);
   }

@@ -92,7 +92,6 @@ function drawType(element) {
 }
 
 board.addEventListener("click", (e) => {
-  console.log();
   let element = e.target;
   let type = e.target.getAttribute("class");
 

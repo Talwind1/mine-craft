@@ -18,4 +18,3 @@ Live version is available at: https://pedantic-shockley-6b1cb7.netlify.app/
 * Drawing the board is done via drawBoard function
 * Changind the board possible only if the user click on the material which match the tool he used
 * Inventory is stored in inventory object
-*
